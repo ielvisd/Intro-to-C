@@ -1,24 +1,73 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
 /*
-    Given a character array s (as a pointer), return the number of 
-    characters in the string.
-    
-    Do not just use the `strlen` function from the standard libary.
+    Given a character pointer x (that points to an array of chars), and a
+    character pointer y, copies the character contents of y over to x. Pointer
+    arithmetic is necessary here. Also, make sure x points to a null terminator
+    at its end to terminate it properly. 
+
+    Example call:
+
+    char buffer[1024];
+
+    string_copy(buffer, "Hello!");
+    printf("%s", buffer); // Prints "Hello!"
 */
-int string_length(char *s)
+void string_copy(char *x, char *y)
 {
+  // char *x which is the buffer
+
+// char * y which is the string to copy
+
+printf("The string length of y is: %d\n", strlen(y)); 
+
+int i;
+  for (i = 0; y[i] != '\0'; i++) {
+x[i] = y[i];
+  }
+  x[i+1] = '\0';
+  
+x = &x[i+1];
+
+  
+  return 0;
 
 }
 
 /*
-    Write a function that reverses the order of string s and outputs 
-    the reversed string to the input array rv. The rv array will have 
-    enough space for the reversed string. Don't forget to terminate 
-    the reversed string with a null character. Return the rv array.
+    Searches the input string `str` for the first instance of the 
+    character `c` (an unsigned char). This function returns a pointer
+    that points to the first instance of the character `c` in the
+    input string `str`.
+
+    Do not use the `strchr` function from the standard library.
 */
-char *reverse_string(char *rv, char *s)
+char *find_char(char *str, int c) {
+int i;
+char *found;
+for (i = 0; str[i] != '\0'; i++) {
+if (str[i] == c) {
+  printf("match at i: %d\n", i); 
+  }
+printf("The address is: %d\n", i); // Prints "2"
+  found = &str[i];
+  
+  return 0;
+  }
+  
+  
+}
+
+/*
+    Searches the input string `haystack` for the first instance of
+    the string `needle`. This function returns a pointer that points
+    to the first instance of the string `needle` in the input
+    string `haystack`. 
+
+    Do not use the `strstr` function from the standard library.
+*/
+char *find_string(char *haystack, char *needle)
 {
 
 }
@@ -26,15 +75,16 @@ char *reverse_string(char *rv, char *s)
 #ifndef TESTING
 int main(void)
 {
-    char quote1[] = "Don't forget to be awesome";
-    char quote2[] = "a man a plan a canal panama";
+  
+    char buffer[24]; //1024 after debugging
 
-    char rv[512];
+    string_copy(buffer, "Hello!");
+    char *found_char = find_char("hello", 'e');
+    char *found_string = find_string("world", "or");
 
-    printf("The string 'Don't forget to be awesome' has %d characters.\n", string_length(quote1));
-    printf("The string 'a man a plan a canal panama' reversed is: '%s'\n", reverse_string(rv, quote2));
+    printf("Found char: %s\n", found_char);
+    printf("Found string: %s\n", found_string);
 
     return 0;
 }
 #endif
-    

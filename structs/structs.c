@@ -1,13 +1,19 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include "lib.h"
+#include <stdlib.h> 
+#include <string.h>
 
+#include "lib.h"
 /* 
     Define the Person struct by specifying the fields that make up the
     Person type. Don't forget to specify the type of each field. A 
     Person should have the fields `name`, `age`, `height`, and `weight`.
 */
 typedef struct Person {
+
+    char *name;
+    int age;
+    int height;
+    int weight;
 
 } Person;
 
@@ -21,7 +27,16 @@ typedef struct Person {
 */
 Person *createPerson(char *name, int age, int height, int weight)
 {
+ 
+    Person *person = malloc(sizeof(Person));
+    int lengthOfName = strlen(name);
+    person->name = malloc(lengthOfName);
+    person->name = string_dup(name);
+    person->age = age;
+    person->weight = weight;
+    person->height = height;
 
+return person;
 }
 
 /*
@@ -30,7 +45,14 @@ Person *createPerson(char *name, int age, int height, int weight)
 */
 void destroyPerson(Person *who)
 {
-
+    if (who->name != NULL)
+    {
+        free(who->name);
+    }
+    if (who != NULL)
+    {
+        free(who);
+    }
 }
 
 #ifndef TESTING
